@@ -1,0 +1,15 @@
+{
+    "name": "qingliu/monitor",
+    "authors": [
+        {
+            "name": "清流",
+            "email": "ruoge3s@qq.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.2",
+        "ext-swoole": ">=4.4",
+        "ext-json": "*",
+        "swoft/swoole-ide-helper": "^4.2"
+    }
+}

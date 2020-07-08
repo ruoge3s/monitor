@@ -1,6 +1,8 @@
 #!/usr/bin/env php
 <?php
 
+date_default_timezone_set('Asia/Shanghai');
+
 define('DIR', __DIR__);
 
 const CONSOLE_COLOR_DEFAULT = "\033[0m";

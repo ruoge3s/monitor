@@ -1,5 +1,14 @@
 <?php
 
+// 自动初始化配置文件
+$config_file = DIR . '/config.php';
+if (!is_file($config_file)) {
+    $config_example_file = DIR . '/config.example.php';
+    exec("cp {$config_example_file} $config_file");
+    echo CONSOLE_COLOR_YELLOW . "自动初始化配置文件成功, 请重试!!" . PHP_EOL;
+    exit(1);
+}
+
 /**
  * 输出错误
  * @param string $message

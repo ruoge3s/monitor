@@ -1,11 +1,5 @@
 <?php
 
-const CONSOLE_COLOR_DEFAULT = "\033[0m";
-const CONSOLE_COLOR_RED = "\033[0;31m";
-const CONSOLE_COLOR_GREEN = "\033[0;32m";
-const CONSOLE_COLOR_YELLOW = "\033[0;33m";
-const CONSOLE_COLOR_BLUE = "\033[0;34m";
-
 return [
     // 项目名称
     "pname" => [

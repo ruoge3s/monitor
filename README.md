@@ -29,3 +29,16 @@ return [
 ```bash
 php bin.php pname
 ```
+
+
+## task任务命令
+
+- 使用密钥同步文件
+```bash
+eval $(ssh-agent -s) && ssh-add ~/key/txy.pem && /usr/bin/rsync -rzvt --exclude "vendor" --exclude "runtime" /project/dir/* root@192.168.1.3:/data/api/unify/
+```
+
+- 使用免密模式同步文件
+```bash
+/usr/bin/rsync -rzvt --exclude "vendor" --exclude "runtime" /project/dir/* root@192.168.1.3:/data/api/unify/
+```

@@ -57,7 +57,24 @@ eval $(ssh-agent -s) && ssh-add ~/key/txy.pem && /usr/bin/rsync -rzvt --exclude 
     ```bash
     #!/usr/bin/env bash
     cd `dirname $0`
-    echo "🚀" $(date "+%Y-%m-%d %H:%M:%S") "开始同步⛽️"
-    rsync -rzvt --exclude "public/storage" --exclude "vendor" --exclude "runtime" `pwd`/* root@192.168.1.1:/var/www/conveyor
-    echo "🔚" $(date "+%Y-%m-%d %H:%M:%S") "同步结束 😂"
+    
+    echo "🚀 $(date "+%Y-%m-%d %H:%M:%S") 开始同步⛽️"
+    
+    # 目标地址
+    REMOTE="root@192.168.1.1"
+    # 目标目录
+    REMOTE_DIR="/data/project/"
+    
+    # 具体要执行的命令
+    eval $(ssh-agent -s) \
+    && ssh-add ~/sk/txy \
+    && /usr/bin/rsync -rzvt \
+        --exclude "sync.sh" \
+        --exclude "vendor" \
+        --exclude "runtime" \
+        `pwd`/* ${REMOTE}:${REMOTE_DIR} \
+    && ssh -p22 ${REMOTE} "sed -i \"s/VERSION_PLACEHOLDER/updateAt \$(date \"+%Y-%m-%d %H:%M:%S\")/g\" ${REMOTE_DIR}config/config.php" \
+    && ssh -p22 ${REMOTE} "docker restart unify"
+    
+    echo "✅ $(date "+%Y-%m-%d %H:%M:%S") 同步结束 😂"
     ```

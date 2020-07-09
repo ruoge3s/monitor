@@ -42,3 +42,22 @@ eval $(ssh-agent -s) && ssh-add ~/key/txy.pem && /usr/bin/rsync -rzvt --exclude 
 ```bash
 /usr/bin/rsync -rzvt --exclude "vendor" --exclude "runtime" /project/dir/* root@192.168.1.3:/data/api/unify/
 ```
+
+
+## 手动同步
+
+- 配置说明
+
+  1. 把下面的同步命令sync.sh添加到项目的根目录，并添加可执行权限
+  2. 在phpstorm中，配置sync.sh为可运行，每次修改完内容，点击一下执行，就能同步到远程服务器进行测试了
+
+- 同步命令
+
+    sync.sh
+    ```bash
+    #!/usr/bin/env bash
+    cd `dirname $0`
+    echo "🚀" $(date "+%Y-%m-%d %H:%M:%S") "开始同步⛽️"
+    rsync -rzvt --exclude "public/storage" --exclude "vendor" --exclude "runtime" `pwd`/* root@192.168.1.1:/var/www/conveyor
+    echo "🔚" $(date "+%Y-%m-%d %H:%M:%S") "同步结束 😂"
+    ```
